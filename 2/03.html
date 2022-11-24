@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
+</head>
+
+<style>
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
+<body>
+  <div id="map">ここに地図を表示</div>
+  <script>
+    const map = L.map('map');
+    map.setView([35.681054, 139.768435], 15);
+
+    const layer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    layer.addTo(map);
+
+    const latlngs_polyline = [
+      [
+        35.678075765444724,
+        139.7619080543518,
+      ],
+      [
+        35.680359090562845,
+        139.77149963378906,
+      ],
+      [
+        35.685500690336404,
+        139.7643542289734,
+      ]
+    ];
+
+    const polyline = L.polyline(latlngs_polyline, { color: '#ff0000', weight: 3 });
+    polyline.addTo(map);
+
+    const latlngs_polygon = [
+      [
+        35.68415867760534,
+        139.76761579513547,
+      ],
+      [
+        35.682973504734456,
+        139.76710081100464,
+      ],
+      [
+        35.682712067172254,
+        139.76534128189087,
+      ],
+      [
+        35.680533387506074,
+        139.76489067077637,
+      ],
+      [
+        35.679609609368576,
+        139.76585626602173,
+      ],
+      [
+        35.677796881563715,
+        139.76523399353027,
+      ],
+      [
+        35.677448275341874,
+        139.7668218612671,
+      ],
+      [
+        35.68347894825895,
+        139.7706413269043,
+      ],
+      [
+        35.68415867760534,
+        139.76761579513547,
+      ]
+    ];
+
+    const polygon = L.polygon(latlngs_polygon, { color: '#00ff00', fillOpacity: 1.0 });
+    polygon.addTo(map);
+  </script>
+</body>
+
+</html>

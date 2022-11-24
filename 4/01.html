@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Display a map on a webpage</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+    const map = new mapboxgl.Map({
+      container: 'map', // container ID
+      style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      center: [139.768435, 35.681054], // starting position [lng, lat]
+      zoom: 14, // starting zoom
+    });
+
+    map.on('load', () => {
+      map.addSource('tokyo-station-source', {
+        'type': 'geojson',
+        'data':
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "properties": {},
+              "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                  [
+                    [
+                      139.76761579513547,
+                      35.68415867760534
+                    ],
+                    [
+                      139.76710081100464,
+                      35.682973504734456
+                    ],
+                    [
+                      139.76534128189087,
+                      35.682712067172254
+                    ],
+                    [
+                      139.76489067077637,
+                      35.680533387506074
+                    ],
+                    [
+                      139.76585626602173,
+                      35.679609609368576
+                    ],
+                    [
+                      139.76523399353027,
+                      35.677796881563715
+                    ],
+                    [
+                      139.7668218612671,
+                      35.677448275341874
+                    ],
+                    [
+                      139.7706413269043,
+                      35.68347894825895
+                    ],
+                    [
+                      139.76761579513547,
+                      35.68415867760534
+                    ]
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      });
+
+      map.addLayer({
+        'id': 'tokyo-station-layer',
+        'type': 'fill',
+        'source': 'tokyo-station-source',
+        'paint': {
+          'fill-color': '#00ff00',
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
