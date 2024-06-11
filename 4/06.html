@@ -25,41 +25,18 @@
 <body>
   <div id="map"></div>
   <script>
-    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+  	mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
     const map = new mapboxgl.Map({
       container: 'map', // container ID
-      style: 'mapbox://styles/mapbox/streets-v12', // style URL
       center: [139.768435, 35.681054], // starting position [lng, lat]
       zoom: 14 // starting zoom
     });
 
-    map.on('load', () => {
-      map.addSource('my-source', {
-        type: 'vector',
-        url: 'mapbox://yochi.cl5jm398m0hy028rw7ql5p4n3-6oxue'
-      });
-      map.addLayer({
-        'id': 'my-layer',
-        'type': 'fill',
-        'source': 'my-source',
-        'source-layer': 'tokyo_station',
-        'paint': {
-          'fill-color': [
-            "interpolate",
-            ["linear"],
-            ["zoom"],
-            12,
-            "rgb(255, 0, 0)",
-            15,
-            "rgb(0, 255, 0)",
-            18,
-            "rgb(0, 0, 255)"
-          ]
-        }
-      }, 'building');
+    map.on('style.load', () => {
+      map.setConfigProperty('basemap', 'lightPreset', 'dawn');
     });
-  </script>
 
+  </script>
 </body>
 
 </html>
